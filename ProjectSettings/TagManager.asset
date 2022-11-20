@@ -10,6 +10,8 @@ TagManager:
   - PlayerAttack
   - trigger
   - coin
+  - attack
+  - health
   layers:
   - Default
   - TransparentFX

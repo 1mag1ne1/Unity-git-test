@@ -56,6 +56,8 @@ public class PlayerHeath : MonoBehaviour
         if(health <= 0)
         {
             StartCoroutine(dyingWait());
+            Boss.b = false;
+            SceneManager.LoadScene(2);
         }
     }
 

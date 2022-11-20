@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public int playerDamage;
     public float attackBoxExistTime;
     public float attackBoxStartTime;
+    public static int changeDamage;
 
 
     private Animator playerOfAn;
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        changeDamage = playerDamage;
         playerDamage = GameObject.FindGameObjectWithTag("PlayerAttack").GetComponent<PlayerAttack>().playerDamage;
         playerOfAn = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         attackCol = this.GetComponent<PolygonCollider2D>();
@@ -34,7 +36,9 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         //playerAttack();
+
         checkAttacking();
+        playerDamage = changeDamage;
         if (Input.GetKeyDown(KeyCode.J) && !isAttack)
         {
             isAttack = true;

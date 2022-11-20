@@ -35,7 +35,7 @@ public class AddBagUI : MonoBehaviour
 
         newItem.item = item;
         newItem.GetComponent<Image>().sprite = item.itemImage;
-        newItem.gameObject.transform.GetChild(0).GetComponent<Text>().text = item.itemNum.ToString();
+        //newItem.gameObject.transform.GetChild(0).GetComponent<Text>().text = item.itemNum.ToString();
     }
 
     public static void refreshItem()

@@ -37,10 +37,10 @@ public class PlayerControl : MonoBehaviour
     public Text attack;
     public Text health;
     private int primaryAttack = 3;
-    private int primaryHealth = 20;
-    public int maxHealth = 20;//最大生命值
+    private int primaryHealth = 15;
+    public int maxHealth = 15;//最大生命值
     public int currentAttack;//现在的攻击力
-    public int currentHealth;//现在的生命值
+    public  int currentHealth;//现在的生命值
 
     public GameObject characterPanel;
     public GameObject bagPanel;
@@ -72,14 +72,14 @@ public class PlayerControl : MonoBehaviour
         //
         updateCoinNum();
         openMyPanel();
-        openShop();
+        //openShop();
         updateCharacterPanel();
 
     }
 
     private void OnEnable()
     {
-        currentHealth = primaryHealth;
+        currentHealth = 15;
         currentAttack = primaryAttack;
     }
 
@@ -222,9 +222,49 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.tag == "coin")
         {
+            print(3);
             Destroy(collision.gameObject);
             coin += 1;
         }
+        if (collision.tag == "attack")
+        {
+            print(1);
+            if (coin >= 2)
+            {
+                
+                Destroy(collision.gameObject);
+                currentAttack += 1;
+                PlayerAttack.changeDamage = currentAttack;
+                coin -= 2;
+            }
+        }
+        if (collision.tag == "health")
+        {
+            print(HealthBar.HealthCurrent);
+            if ( coin >= 1)
+            {
+                print(1);
+                print(currentHealth);
+                Destroy(collision.gameObject);
+                Mathf.Clamp(currentHealth + 1, 0, maxHealth);
+                print(2);
+                print(currentHealth);
+                HealthBar.HealthCurrent = currentHealth;
+                coin -= 1;
+            }
+                
+            
+            /*if (currentHealth<20&&coin >= 1)
+            {
+                print(2);
+                print(currentHealth);
+                Destroy(collision.gameObject);
+                changeHealth(1);
+                HealthBar.HealthCurrent = currentHealth;
+                coin -= 1;
+            }*/
+        }
+
     }
     void updateCoinNum()
     {
@@ -245,13 +285,13 @@ public class PlayerControl : MonoBehaviour
             characterPanel.SetActive(isopen);
         }
     }
-    void openShop()
+    /*void openShop()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             right = !right;
             bagPanel.SetActive(right);
         }
-    }
+    }*/
 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class Boss : MonoBehaviour
@@ -37,21 +38,14 @@ public class Boss : MonoBehaviour
     {
         attack();
         
-        if (health <= 50)
-        {
-            anim.SetBool("BossIdle", false);
-            anim.SetBool("BossIdle2",true);
-            anim.SetBool("BossIdle3", true);
-            b = true;
-        }
+       
         if (health <= 0)
         {
-            anim.SetTrigger("BossDeath");
-            float stime = Time.deltaTime;
-            if (Time.deltaTime - stime > 1.1)
-            {
-                Destroy(gameObject);
-            }
+            anim.SetBool("Death",true);
+            b = false;
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName("BossDeath"))
+                SceneManager.LoadScene(3);
+            
         }
     }
     public static int getN()
@@ -87,6 +81,7 @@ public class Boss : MonoBehaviour
     {
         if (health <= 50)
         {
+            b = true;
             if (Math.Abs(transform.position.x - trans.position.x) < 5)
             {
                 
